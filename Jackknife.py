@@ -41,8 +41,8 @@ def remove_redundant(seqdata):
 				newdata[s].append(seqdata[s][i])
 			uniqcount += 1
 		count += 1
-		if count % 100000 == 0:
-			print "{}00K residues parsed...".format(str(count/100000))
+		if count % 10000 == 0:
+			print "{}0K residues parsed...".format(str(count/10000))
 
 	print "Done!"
 	print uniqcount, "informative residues out of", length, "total positions."
