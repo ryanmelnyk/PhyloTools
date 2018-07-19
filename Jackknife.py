@@ -14,7 +14,7 @@ Script that removes redundancy and/or generates jackknife resampling (i.e. witho
 	parser.add_argument('--size',type=int,help='length of jackknife (default 10000)')
 	parser.add_argument('--num',type=int,help='number of jackknifes (default 1)')
 	parser.add_argument('--remove_redundant',action='store_true',help='use if you wish to remove sites that are non-informative (i.e. the same in all sequences)')
-	parser.add_argument('--remove_gapped',type=float,help='use if you wish to remove gapped sites - must include cutoff threshold.')
+	parser.add_argument('--remove_gapped',type=float,help='use if you wish to remove gapped sites - enter max proportion sites that can be gapped.')
 	return parser.parse_args()
 
 def parse(align_file):
