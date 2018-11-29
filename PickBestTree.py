@@ -21,9 +21,13 @@ def main():
 	inferences = args.inferences
 	scores = []
 	for i in range(0,inferences):
-		for line in open("RAxML_info.{}_{}".format(prefix,i),'r'):
-			if line.startswith("Final GAMMA-based Score of best tree"):
-				scores.append(float(line.rstrip().split()[-1]))
+		try:
+			for line in open("RAxML_info.{}_{}".format(prefix,i),'r'):
+				if line.startswith("Final GAMMA-based Score of best tree"):
+					scores.append(float(line.rstrip().split()[-1]))
+					print "Tree {}: {}".format(i,scores[-1])
+		except IOError:
+			print "Tree {}: File not found."
 
 	print scores
 	print max(scores)
