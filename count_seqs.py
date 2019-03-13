@@ -10,4 +10,4 @@ for seq in SeqIO.parse(open(sys.argv[1],'r'),'fasta'):
 		lengths[l] += 1
 
 for l in lengths:
-	print lengths[l], "sequences of length", l
+	print(lengths[l], "sequences of length", l)
