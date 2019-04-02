@@ -27,7 +27,7 @@ def remove_redundant(seqdata):
 	first = seqdata.keys()[0]
 	newdata = {s : [] for s in seqdata.keys()}
 	length = len(seqdata[first])
-	print length, "residues to scan..."
+	print(length, "residues to scan...")
 	count = 0
 	uniqcount = 0
 	for i in range(0,length):
@@ -42,18 +42,18 @@ def remove_redundant(seqdata):
 			uniqcount += 1
 		count += 1
 		if count % 10000 == 0:
-			print "{}0K residues parsed...".format(str(count/10000))
+			print("{}0K residues parsed...".format(str(count/10000)))
 
-	print "Done!"
-	print uniqcount, "informative residues out of", length, "total positions."
+	print("Done!")
+	print(uniqcount, "informative residues out of", length, "total positions.")
 	return {s : "".join(newdata[s]) for s in newdata}
 
 def select_sites(prefix,seqdata,size,num):
-	first = seqdata.keys()[0]
-	sites = range(0,len(seqdata[first]))
-	print "Beginning jackknife replicates of size {}...".format(str(size))
+	first = list(seqdata.keys())[0]
+	sites = list(range(0,len(seqdata[first])))
+	print("Beginning jackknife replicates of size {}...".format(str(size)))
 	for i in range(0,num):
-		print "jackknife replicate {} of {}...".format(str(i+1),str(num))
+		print("jackknife replicate {} of {}...".format(str(i+1),str(num)))
 		jackknife = {s : [] for s in seqdata}
 		selected = random.sample(sites,size)
 		[sites.remove(s) for s in selected]
@@ -67,11 +67,11 @@ def select_sites(prefix,seqdata,size,num):
 	return
 
 def remove_gapped(seqdata,t):
-	first = seqdata.keys()[0]
+	first = list(seqdata.keys())[0]
 	newdata = {s : [] for s in seqdata.keys()}
 
 	length = len(seqdata[first])
-	print length, "residues to scan..."
+	print(length, "residues to scan...")
 	count = 0
 	gap_totalcount = 0
 	for i in range(0,length):
@@ -88,10 +88,10 @@ def remove_gapped(seqdata,t):
 
 		count += 1
 		if count % 100000 == 0:
-			print "{}00K residues parsed...".format(str(count/100000))
+			print("{}00K residues parsed...".format(str(count/100000)))
 
-	print "Done!"
-	print gap_totalcount, "informative residues out of", length, "total positions."
+	print("Done!")
+	print(gap_totalcount, "informative residues out of", length, "total positions.")
 	return {s : "".join(newdata[s]) for s in newdata}
 
 def main():

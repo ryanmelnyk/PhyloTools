@@ -25,12 +25,12 @@ def main():
 	for seq in SeqIO.parse(infile,'fasta'):
 		gapprop = float(str(seq.seq).count("-"))/float(len(str(seq.seq)))
 		if gapprop > t:
-			print "{} has too many gaps. ({})".format(seq.id,str(gapprop))
+			print("{} has too many gaps. ({})".format(seq.id,str(gapprop)))
 			count += 1
 		else:
 			outfile.write(">{}\n{}\n".format(seq.id,str(seq.seq)))
 
-	print count, "total strains removed."
+	print(count, "total strains removed.")
 
 if __name__ == '__main__':
 	main()
