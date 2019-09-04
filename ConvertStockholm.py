@@ -17,6 +17,7 @@ Convert stockholm format to fasta.
 def main():
 	args = parse_args()
 	align_data = {}
+	str_tbl=str.maketrans("","",string.ascii_lowercase + ".")
 	for line in open(args.infile,'r'):
 		if line.startswith("#") or line.startswith("//"):
 			continue
@@ -25,9 +26,9 @@ def main():
 		if len(vals) < 1:
 			continue
 		elif vals[0] in align_data:
-			align_data[vals[0]].append(vals[1].translate(None,string.ascii_lowercase).replace(".",""))
+			align_data[vals[0]].append(vals[1].translate(str_tbl))
 		else:
-			align_data[vals[0]] = [vals[1].translate(None,string.ascii_lowercase).replace(".","")]
+			align_data[vals[0]] = [vals[1].translate(str_tbl)]
 	o = open(args.outfile,'w')
 	for a in align_data:
 		o.write(">{}\n{}\n".format(a,"".join(align_data[a])))
