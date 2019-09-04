@@ -9,5 +9,5 @@ for seq in SeqIO.parse(open(sys.argv[1],'r'),'fasta'):
 	else:
 		lengths[l] += 1
 
-for l in lengths:
+for l in sorted(lengths.keys()):
 	print(lengths[l], "sequences of length", l)
