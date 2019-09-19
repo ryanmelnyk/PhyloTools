@@ -29,9 +29,10 @@ def main():
 			continue
 		else:
 			leafnodes = [x for x in node.get_leaves()]
-			if len(leafnodes) > 10:
-				print len(leafnodes)
-			if len(leafnodes) > 1:
+			print(node.name,len(leafnodes))
+			if len(leafnodes) > 500:
+				continue
+			elif len(leafnodes) > 1:
 				pairs = [p for p in combinations(leafnodes,2)]
 				dist = 0.0
 				for p in pairs:
@@ -39,12 +40,11 @@ def main():
 				if dist/len(pairs) < mindist:
 					good_strains.append(leafnodes[0].name)
 					[to_skip.append(desc) for desc in node.iter_descendants("preorder")]
-			if node.is_leaf():
-				good_strains.append(node.name)
-			# print node.get_distance(this_node[0],this_node[1])
+			else:
+				if node.is_leaf():
+					good_strains.append(node.name)
 
-
-	print len(good_strains), "at threshold", mindist
+	print(len(good_strains), "at threshold", mindist)
 	o.write("\n".join(good_strains))
 
 if __name__ == '__main__':
