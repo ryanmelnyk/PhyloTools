@@ -13,7 +13,9 @@ by eliminating very similar strains.
 	''')
 	parser.add_argument('tree', type=str,help='path to tree file')
 	parser.add_argument('mindist', type=float,help='average distance to compress')
+	parser.add_argument('max_node_size',type=int,help="maximum node size (# of leaves) to try to compress")
 	parser.add_argument('output',type=str,help="path to write output strainlist to")
+
 	return parser.parse_args()
 
 def main():
@@ -30,7 +32,7 @@ def main():
 		else:
 			leafnodes = [x for x in node.get_leaves()]
 			print(node.name,len(leafnodes))
-			if len(leafnodes) > 500:
+			if len(leafnodes) > args.max_node_size:
 				continue
 			elif len(leafnodes) > 1:
 				pairs = [p for p in combinations(leafnodes,2)]
