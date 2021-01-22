@@ -32,8 +32,10 @@ def parse_args():
 
 def parse(align_file):
     seqdata = {}
+    print("Reading alignment into memory...")
     for seq in SeqIO.parse(open(align_file, 'r'), 'fasta'):
         seqdata[str(seq.id)] = str(seq.seq)
+    print("Done!")
     return seqdata
 
 
@@ -103,8 +105,8 @@ def remove_gapped(seqdata, t):
             gap_totalcount += 1
 
         count += 1
-        if count % 100000 == 0:
-            print("{}00K residues parsed...".format(str(count/100000)))
+        if count % 10000 == 0:
+            print("{}0K residues parsed...".format(str(count/10000)))
 
     print("Done!")
     print(gap_totalcount, "informative residues out of", length,
