@@ -60,7 +60,7 @@ def remove_redundant(seqdata):
         if count % 10000 == 0:
             print("{}0K residues parsed...".format(str(int(count/10000))))
 
-    print("Done!")
+    print("Finished!")
     print(uniqcount, "informative residues out of", length, "total positions.")
     return {s: "".join(newdata[s]) for s in newdata}
 
