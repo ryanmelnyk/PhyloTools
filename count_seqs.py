@@ -3,13 +3,18 @@
 from Bio import SeqIO
 import sys
 
-lengths = {}
-for seq in SeqIO.parse(open(sys.argv[1],'r'),'fasta'):
-	l = len(seq.seq)
-	if l not in lengths:
-		lengths[l] = 1
-	else:
-		lengths[l] += 1
+if len(sys.argv) > 2:
+    seq_format = sys.argv[2]
+else:
+    seq_format = 'fasta'
 
-for l in sorted(lengths.keys()):
-	print(lengths[l], "sequences of length", l)
+lengths = {}
+for seq in SeqIO.parse(open(sys.argv[1], 'r'), seq_format):
+    seq_len = len(seq.seq)
+    if seq_len not in lengths:
+        lengths[seq_len] = 1
+    else:
+        lengths[seq_len] += 1
+
+for seq_len in sorted(lengths.keys()):
+    print(lengths[seq_len], "sequences of length", seq_len)
