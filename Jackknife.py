@@ -57,8 +57,13 @@ def remove_redundant(seqdata):
                 newdata[s].append(seqdata[s][i])
             uniqcount += 1
         count += 1
-        if count % 10000 == 0:
-            print("{}0K residues parsed...".format(str(int(count/10000))))
+        if count % 100000 == 0:
+            if count < 1e6:
+                print("{}00K residues parsed...".format(
+                    str(int(count/100000)))
+                )
+            else:
+                print("{:.1f}M residues parsed...".format(count/1e6))
 
     print("Finished!")
     print(uniqcount, "informative residues out of", length, "total positions.")
@@ -98,15 +103,20 @@ def remove_gapped(seqdata, t):
             if seqdata[s][i] == "-":
                 gap_rescount += 1
 
-        prop = float(gap_rescount)/float(len(seqdata.keys()))
+        prop = gap_rescount/len(seqdata.keys())
         if prop < t:
             for s in seqdata:
                 newdata[s].append(seqdata[s][i])
             gap_totalcount += 1
 
         count += 1
-        if count % 10000 == 0:
-            print("{}0K residues parsed...".format(str(count/10000)))
+        if count % 100000 == 0:
+            if count < 1e6:
+                print("{}00K residues parsed...".format(
+                    str(int(count/100000)))
+                )
+            else:
+                print("{:.1f}M residues parsed...".format(count/1e6))
 
     print("Done!")
     print(gap_totalcount, "informative residues out of", length,
